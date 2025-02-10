@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+<title>Subtractive Illusions</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="title">
+         <a href="#" onclick="refreshPage()">Subtractive Illusions</a>
+    </div>
+
+    <div class="info">
+        <h2>
+            Hommage à Josef Albers 
+        </h2>
+    </div>
+
+<div class="overlay" id="overlay">
+  <div class="centered-text">
+    Josef Albers (1888—1976) è stato un artista e insegnante tedesco, naturalizzato americano, noto soprattutto per il suo lavoro nel campo dell'arte astratta e per il suo contributo all'educazione artistica. È famoso inoltre, per il suo libro "Interaction of Color", pubblicato per la prima volta nel 1963.
+<br><br>
+La teoria del colore di Josef Albers si concentra sull'esperienza percettiva del colore e sull'interazione tra colori. In "Interaction of Color", Albers esplora le relazioni tra i colori e la percezione visiva attraverso una serie di esperimenti e studi basati sulla pratica artistica.
+<br><br>
+Nel libro inoltre, Albers sottolinea l'importanza dell'interazione tra colori e come un colore possa apparire diverso a seconda dei colori con cui è accostato. Questo concetto è evidente nei suoi esperimenti con "scatole di colore" in cui i colori sembrano cambiare quando circondati da diversi sfondi.
+<br><br>
+Questo sito si propone di reinterpretare la concezione della scatola del colore di Josef Albers, trasformandola in un'implementazione digitale. L'obiettivo è avvicinare designer e creativi al concetto di interazione tra i colori attraverso una piattaforma online.
+<br><br>
+Sito web realizzato da Dud3 Collective (Ares Pedroli e Manuel Cattaneo)
+  </div>
+</div>
+
+<div id="container" class="container">
+  <div id="c1" class="cerchio"></div>
+  <div id="c2" class="cerchio"></div>
+  <div id="q1" class="riquadro-1"></div>
+  <div id="q2" class="riquadro-2"></div>
+</div>
+
+    <div class="box1">
+         <div class="slider1">
+            <label>C</label>
+            <input type="range" orient="vertical" min="0" max="100" value="50" id="c_1" name="c_1"/>
+            <label>M</label>
+            <input type="range" orient="vertical" min="0" max="100" value="50" id="m_1" name="m_1"/>
+            <label>Y</label>
+            <input type="range" orient="vertical" min="0" max="100" value="50" id="y_1" name="y_1"/>
+            <label>K</label>
+            <input type="range" orient="vertical" min="0" max="100" value="50" id="k_1" name="k_1"/>
+        </div>    
+    </div>
+
+    <div class="box2">
+        <div class="slider2">
+            <label>C</label>
+            <input type="range" orient="vertical" min="0" max="100" value="50" id="c_2" name="c_2"/>
+            <label>M</label>
+            <input type="range" orient="vertical" min="0" max="100" value="50" id="m_2" name="m_2"/>
+            <label>Y</label>
+            <input type="range" orient="vertical" min="0" max="100" value="50" id="y_2" name="y_2"/>
+            <label>K</label>
+            <input type="range" orient="vertical" min="0" max="100" value="50" id="k_2" name="k_2"/>
+        </div>
+    </div>
+
+</body>
+<script src="script.js">
+
+</script>
+
+
+<script>
+        function refreshPage() {
+            location.reload(); // Reloads the current page
+        }
+
+           document.addEventListener('DOMContentLoaded', function() {
+            const trigger = document.querySelector('.info');
+            const overlay = document.getElementById('overlay');
+
+            trigger.addEventListener('click', function() {
+                overlay.classList.toggle('active', !overlay.classList.contains('active'));
+            });
+        });
+    </script>
+</body>
+</html>

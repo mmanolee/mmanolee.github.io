@@ -1,0 +1,323 @@
+@font-face {
+  font-family: Mono;
+  src: url(static/AzeretMono-Medium.ttf);
+}
+
+@font-face {
+  font-family: Monoita;
+  src: url(static/AzeretMono-MediumItalic.ttf);
+}
+
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+  }
+
+  a{
+    font-size: 20px;
+    line-height: 22px;
+    font-family: "Mono";
+    margin: 0;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    padding-left: 2px;
+  }
+
+   a:hover {
+   text-decoration: none; /* Rimuovi la sottolineatura quando il link è cliccato */
+        }  
+
+   a:active {
+   text-decoration: none; /* Rimuovi la sottolineatura quando il link è cliccato */
+   font-family: "Monoita"; /* Stile quando l'elemento è attivo (cliccato) */
+        }
+        
+  a:not(:active) {
+    font-family: "Mono"; /* Stile quando l'elemento non è attivo */
+}
+    h2{
+    font-size: 20px;
+    line-height: 22px;
+    font-family: "Mono";
+    background-color: white;
+    margin: 0;
+    padding-left: 2px;
+  }
+
+  h2:active {
+    font-family: "Monoita"; /* Stile quando l'elemento è attivo (cliccato) */
+}
+
+  h2:not(:active) {
+    font-family: "Mono"; /* Stile quando l'elemento non è attivo */
+}
+
+    label {
+    font-size: 20px;
+    line-height: 20px;
+    font-family: "Mono";
+    margin: 0px;
+    color: white;
+  }
+
+  .title {
+  top: 0px;
+  position: fixed;
+  width: 50vw;
+  background-color: white;
+  height: 22px;
+  z-index: 10;
+  }
+
+  @media (max-width: 1000px) {
+    .title {
+        width: 100vw; /* Larghezza del 100% della larghezza della finestra */
+    }
+}
+
+  .info{
+  bottom: 0px;
+  position: fixed;
+  width: 50vw;
+  height: 22px;
+  transition: height 0.5s ease; 
+  z-index: 10;
+  cursor: pointer;
+  }
+
+    @media (max-width: 1000px) {
+    .info {
+      bottom: 22px;
+        width: 100vw; /* Larghezza del 100% della larghezza della finestra */
+    }
+}
+
+
+  .box1{
+    background-color: black;
+    top: 0vh;
+    right: 0vw;
+    /* position: fixed; */
+    /* height: 50vh; */
+    width: 50vw;
+    position: fixed;
+    /* bottom: 150px; */
+    width: 50vw;
+    height: 22px;
+      z-index: 10;
+}
+
+   @media (max-width: 1000px) {
+    .box1 {
+        top: 22px;
+        width: 100vw; /* Larghezza del 100% della larghezza della finestra */
+    }
+}
+
+  .box2{
+    background-color: black;
+    bottom: 0vh;
+    right: 0vw;
+    /* position: fixed; */
+    /* height: 50vh; */
+    width: 50vw;
+    position: fixed;
+    /* bottom: 150px; */
+    width: 50vw;
+    height: 22px;
+      z-index: 10;
+}
+
+@media (max-width: 1000px) {
+    .box2 {
+        width: 100vw; /* Larghezza del 100% della larghezza della finestra */
+    }
+}
+
+  .colors{
+  left:50vw;
+  position: fixed;
+  height:100vh;
+  width: 50vw;
+  }
+
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+  .section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #myCanvas{
+    z-index: 0;
+    height: calc(100vh - 40px);
+     position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #myCanvas:after {
+  content: "";
+  display: block;
+  padding-bottom: 50%;
+}
+
+.slider1 {
+    position: relative;
+    /* bottom: 130px; */
+    /* margin-left: 10px; */
+    /* width: 25vw; */
+    /* left: 25vw; */
+    display: flex;
+    justify-content: flex-end;
+    top: 2px;
+}
+
+.slider2{
+  position: relative;
+    /* bottom: 130px; */
+    /* margin-left: 10px; */
+    /* width: 25vw; */
+    /* left: 25vw; */
+    display: flex;
+    justify-content: flex-end;
+    top: 2px;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 47px;
+    height: 12px;
+    background-color: black;
+    border: 1px solid white;
+    outline: none;
+    border-radius: 100px;    
+    margin-right: 8px;
+}
+
+input::-webkit-slider-thumb{
+    box-shadow: 0px 0px 0px #000000;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    cursor: pointer;
+    -webkit-appearance: none;
+    cursor: grabbing;
+    height: 11px;
+    width: 11px;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  cursor: pointer;
+}
+
+.container:active { 
+            cursor: grab;
+        } 
+
+.cerchio {
+  position: absolute;
+  width: 100px;
+    height: 100px;
+  background-color: #ff0000;
+      z-index: 100;
+}
+
+@media (max-width: 1000px) {
+    .cerchio {
+        width: 100px;
+  height: 100px;
+    }
+}
+
+.cerchio:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 25%;
+}
+
+.cerchio:nth-child(2) {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 75%;
+}
+
+.riquadro-1 {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+      background-color: blue;
+  top: 0;
+  cursor: pointer;
+}
+
+.riquadro-2 {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background-color: #00ff00;
+  bottom: 0;
+}
+
+.overlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 0;
+    background-color: white;
+    transition: height 0.5s ease;
+    overflow-y: auto; /* Modifica overflow-y da "hidden" a "auto" per abilitare lo scrolling verticale */
+    z-index: 9;
+    justify-content: center;
+    align-items: center;
+}
+
+    .overlay.active {
+        height: 100vh;
+    }
+
+    .centered-text {
+      text-align: center; /* Centra il testo orizzontalmente */
+      font-size: 42px; /* Dimensione del testo */
+      color: black; /* Colore del testo */
+      font-style: italic; /* Stile del testo a epigrafe */
+      padding-left: 20vh;
+      padding-right: 20vh;
+      padding-top: 20vh;
+      padding-bottom: 20vh;
+      font-family: times new roman;
+}
+
+@media (max-width: 1000px) {
+    .centered-text {
+        padding-left: 10vh;
+      padding-right: 10vh;
+      padding-top: 10vh;
+      padding-bottom: 10vh;
+      font-size: 28px; /* Dimensione del testo */
+    }
+}
+
+@media (max-width: 400px) {
+    .centered-text {
+        padding-left: 8vh;
+      padding-right: 8vh;
+      padding-top: 10vh;
+      padding-bottom: 10vh;
+      font-size: 17px; /* Dimensione del testo */
+    }
+}
+
