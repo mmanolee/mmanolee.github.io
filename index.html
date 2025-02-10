@@ -1,87 +1,58 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Subtractive Illusions</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    <style>
+        video, canvas { width: 100%; max-width: 400px; }
+        #output { margin-top: 10px; font-size: 1.2em; }
+    </style>
 </head>
 <body>
 
-    <div class="title">
-         <a href="#" onclick="refreshPage()">Subtractive Illusions</a>
-    </div>
+    <h2>QR Code Scanner</h2>
+    <video id="video" autoplay></video>
+    <canvas id="canvas" hidden></canvas>
+    <div id="output">Waiting for QR Code...</div>
 
-    <div class="info">
-        <h2>
-            Hommage à Josef Albers 
-        </h2>
-    </div>
+    <script>
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const output = document.getElementById("output");
 
-<div class="overlay" id="overlay">
-  <div class="centered-text">
-    Josef Albers (1888—1976) è stato un artista e insegnante tedesco, naturalizzato americano, noto soprattutto per il suo lavoro nel campo dell'arte astratta e per il suo contributo all'educazione artistica. È famoso inoltre, per il suo libro "Interaction of Color", pubblicato per la prima volta nel 1963.
-<br><br>
-La teoria del colore di Josef Albers si concentra sull'esperienza percettiva del colore e sull'interazione tra colori. In "Interaction of Color", Albers esplora le relazioni tra i colori e la percezione visiva attraverso una serie di esperimenti e studi basati sulla pratica artistica.
-<br><br>
-Nel libro inoltre, Albers sottolinea l'importanza dell'interazione tra colori e come un colore possa apparire diverso a seconda dei colori con cui è accostato. Questo concetto è evidente nei suoi esperimenti con "scatole di colore" in cui i colori sembrano cambiare quando circondati da diversi sfondi.
-<br><br>
-Questo sito si propone di reinterpretare la concezione della scatola del colore di Josef Albers, trasformandola in un'implementazione digitale. L'obiettivo è avvicinare designer e creativi al concetto di interazione tra i colori attraverso una piattaforma online.
-<br><br>
-Sito web realizzato da Dud3 Collective (Ares Pedroli e Manuel Cattaneo)
-  </div>
-</div>
-
-<div id="container" class="container">
-  <div id="c1" class="cerchio"></div>
-  <div id="c2" class="cerchio"></div>
-  <div id="q1" class="riquadro-1"></div>
-  <div id="q2" class="riquadro-2"></div>
-</div>
-
-    <div class="box1">
-         <div class="slider1">
-            <label>C</label>
-            <input type="range" orient="vertical" min="0" max="100" value="50" id="c_1" name="c_1"/>
-            <label>M</label>
-            <input type="range" orient="vertical" min="0" max="100" value="50" id="m_1" name="m_1"/>
-            <label>Y</label>
-            <input type="range" orient="vertical" min="0" max="100" value="50" id="y_1" name="y_1"/>
-            <label>K</label>
-            <input type="range" orient="vertical" min="0" max="100" value="50" id="k_1" name="k_1"/>
-        </div>    
-    </div>
-
-    <div class="box2">
-        <div class="slider2">
-            <label>C</label>
-            <input type="range" orient="vertical" min="0" max="100" value="50" id="c_2" name="c_2"/>
-            <label>M</label>
-            <input type="range" orient="vertical" min="0" max="100" value="50" id="m_2" name="m_2"/>
-            <label>Y</label>
-            <input type="range" orient="vertical" min="0" max="100" value="50" id="y_2" name="y_2"/>
-            <label>K</label>
-            <input type="range" orient="vertical" min="0" max="100" value="50" id="k_2" name="k_2"/>
-        </div>
-    </div>
-
-</body>
-<script src="script.js">
-
-</script>
-
-
-<script>
-        function refreshPage() {
-            location.reload(); // Reloads the current page
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+                video.srcObject = stream;
+                requestAnimationFrame(scanQR);
+            } catch (error) {
+                output.innerText = "Error accessing camera: " + error;
+            }
         }
 
-           document.addEventListener('DOMContentLoaded', function() {
-            const trigger = document.querySelector('.info');
-            const overlay = document.getElementById('overlay');
+        function scanQR() {
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const qrCode = jsQR(imageData.data, canvas.width, canvas.height);
+                if (qrCode) {
+                    output.innerText = "QR Code: " + qrCode.data;
+                } else {
+                    requestAnimationFrame(scanQR);
+                }
+            } else {
+                requestAnimationFrame(scanQR);
+            }
+        }
 
-            trigger.addEventListener('click', function() {
-                overlay.classList.toggle('active', !overlay.classList.contains('active'));
-            });
-        });
+        startCamera();
     </script>
+
 </body>
 </html>
+
