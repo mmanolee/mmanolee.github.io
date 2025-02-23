@@ -1,323 +1,443 @@
-@font-face {
-  font-family: Mono;
-  src: url(static/AzeretMono-Medium.ttf);
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
-@font-face {
-  font-family: Monoita;
-  src: url(static/AzeretMono-MediumItalic.ttf);
+/* Header */
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 0vh 3vh;
+  height: 8vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
-
-
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: white;
-  }
-
-  a{
-    font-size: 20px;
-    line-height: 22px;
-    font-family: "Mono";
-    margin: 0;
-    color: black;
-    cursor: pointer;
-    text-decoration: none;
-    padding-left: 2px;
-  }
-
-   a:hover {
-   text-decoration: none; /* Rimuovi la sottolineatura quando il link è cliccato */
-        }  
-
-   a:active {
-   text-decoration: none; /* Rimuovi la sottolineatura quando il link è cliccato */
-   font-family: "Monoita"; /* Stile quando l'elemento è attivo (cliccato) */
-        }
-        
-  a:not(:active) {
-    font-family: "Mono"; /* Stile quando l'elemento non è attivo */
+header .logo img {
+  padding: 5vh 0vh 0vh;
+  height: 10vh; /* Adjust logo height */
 }
-    h2{
-    font-size: 20px;
-    line-height: 22px;
-    font-family: "Mono";
-    background-color: white;
-    margin: 0;
-    padding-left: 2px;
-  }
-
-  h2:active {
-    font-family: "Monoita"; /* Stile quando l'elemento è attivo (cliccato) */
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
-
-  h2:not(:active) {
-    font-family: "Mono"; /* Stile quando l'elemento non è attivo */
+nav ul li a:hover {
+  color: #FFEB3B; /* Yellow color on hover */
 }
-
-    label {
-    font-size: 20px;
-    line-height: 20px;
-    font-family: "Mono";
-    margin: 0px;
-    color: white;
-  }
-
-  .title {
-  top: 0px;
-  position: fixed;
-  width: 50vw;
-  background-color: white;
-  height: 22px;
-  z-index: 10;
-  }
-
-  @media (max-width: 1000px) {
-    .title {
-        width: 100vw; /* Larghezza del 100% della larghezza della finestra */
-    }
+nav ul li {
+  margin-left: 20px;
 }
-
-  .info{
-  bottom: 0px;
-  position: fixed;
-  width: 50vw;
-  height: 22px;
-  transition: height 0.5s ease; 
-  z-index: 10;
-  cursor: pointer;
-  }
-
-    @media (max-width: 1000px) {
-    .info {
-      bottom: 22px;
-        width: 100vw; /* Larghezza del 100% della larghezza della finestra */
-    }
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease;
 }
 
 
-  .box1{
-    background-color: black;
-    top: 0vh;
-    right: 0vw;
-    /* position: fixed; */
-    /* height: 50vh; */
-    width: 50vw;
-    position: fixed;
-    /* bottom: 150px; */
-    width: 50vw;
-    height: 22px;
-      z-index: 10;
+/* FIRST IMAGE LIST */
+.image-section {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  height: 100vh; /* Takes 100% of the viewport height */
+  background-color: #d8d8d8; /* Light grey background */
+  padding: 0vh; /* Optional: Adds some spacing around the image */
+  position: relative; /* For absolute positioning of child elements */
 }
 
-   @media (max-width: 1000px) {
-    .box1 {
-        top: 22px;
-        width: 100vw; /* Larghezza del 100% della larghezza della finestra */
-    }
+.image-section img {
+  max-width: 100%; /* Ensures the image is responsive */
+  max-height: 100vh; /* Limits the height to the viewport height */
+  object-fit: contain; /* Keeps the image aspect ratio intact */
 }
 
-  .box2{
-    background-color: black;
-    bottom: 0vh;
-    right: 0vw;
-    /* position: fixed; */
-    /* height: 50vh; */
-    width: 50vw;
-    position: fixed;
-    /* bottom: 150px; */
-    width: 50vw;
-    height: 22px;
-      z-index: 10;
+#image {
+  transition: opacity 0.5s ease; /* Smooth fade effect */
+  padding: 10vh;
+}
+/* Add a class to fade out the image */
+.fade-out {
+  opacity: 0;
+}
+.arrow {
+  position: absolute; /* Position arrows absolutely within the container */
+  top: 50%; /* Center vertically */
+  font-size: 3rem; /* Adjust arrow size */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  color: #333; /* Arrow color */
+  user-select: none; /* Prevents text selection */
+  transition: transform 0.2s ease, color 0.2s ease; /* Smooth hover effects */
+  height: 50%; /* Set height to 50% of the container */
+  display: flex; /* Use flexbox for centering content */
+  align-items: center; /* Center content vertically */
+}
+.arrow:hover {
+  color: #000; /* Darker color on hover */
+  transform: scale(1.2); /* Slightly enlarge on hover */
+}
+.left-arrow {
+  left: 20px; /* Position the left arrow 20px from the left edge */
+}
+.right-arrow {
+  right: 20px; /* Position the right arrow 20px from the right edge */
+}
+/* Text box styling */
+.text-box {
+  position: absolute; /* Positions the text box over the image */
+  top: 50%; /* Centers vertically */
+  left: 50%; /* Centers horizontally */
+  transform: translate(-50%, -50%); /* Adjusts for perfect centering */
+  text-align: left; /* Centers the text */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  padding: 10vh; /* Adds spacing inside the text box */
+  border-radius: 1vh; /* Rounds the corners */
+  color: white; /* Text color */
 }
 
-@media (max-width: 1000px) {
-    .box2 {
-        width: 100vw; /* Larghezza del 100% della larghezza della finestra */
-    }
+.text-box h1 {
+  font-size: 2rem; /* Title font size */
+  margin: 0; /* Removes default margin */
 }
 
-  .colors{
-  left:50vw;
-  position: fixed;
-  height:100vh;
-  width: 50vw;
-  }
-
-  .container {
-    display: flex;
-    height: 100vh;
-  }
-  .section {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #myCanvas{
-    z-index: 0;
-    height: calc(100vh - 40px);
-     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  #myCanvas:after {
-  content: "";
-  display: block;
-  padding-bottom: 50%;
+.text-box p {
+  font-size: 1rem; /* Small text font size */
+  margin: 10px 0 0; /* Adds a small margin above the text */
+}
+.text-box {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds a shadow */
 }
 
-.slider1 {
-    position: relative;
-    /* bottom: 130px; */
-    /* margin-left: 10px; */
-    /* width: 25vw; */
-    /* left: 25vw; */
-    display: flex;
-    justify-content: flex-end;
-    top: 2px;
+/* Our Mission Section */
+.mission-section {
+  /*height: 100vh;*/
+  display: flex;
+  align-items: center;
+  padding: 10vh 10vh;
+  background: linear-gradient(90deg, #e0f7fa 0%, #ffffff 100%);
+}
+.mission-section h2 {
+  flex: 1;
+  font-size: 36px;
+  margin-right: 20px;
+  color: #2E7D32; /* Dark green */
+}
+.mission-content {
+  flex: 2;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
 }
 
-.slider2{
-  position: relative;
-    /* bottom: 130px; */
-    /* margin-left: 10px; */
-    /* width: 25vw; */
-    /* left: 25vw; */
-    display: flex;
-    justify-content: flex-end;
-    top: 2px;
-}
-
-input[type=range] {
-    -webkit-appearance: none;
-    width: 47px;
-    height: 12px;
-    background-color: black;
-    border: 1px solid white;
-    outline: none;
-    border-radius: 100px;    
-    margin-right: 8px;
-}
-
-input::-webkit-slider-thumb{
-    box-shadow: 0px 0px 0px #000000;
-    border-radius: 50%;
-    border: none;
-    background: white;
-    cursor: pointer;
-    -webkit-appearance: none;
-    cursor: grabbing;
-    height: 11px;
-    width: 11px;
-}
-
-.container {
-  position: relative;
-  width: 100%;
+/* Save Section */
+.save-section {
   height: 100vh;
+  padding: 10vh 10vh;
+  background: linear-gradient(90deg, #ffffff 0%, #e0f7fa 100%);
+}
+
+/* Header Content (h2 and save-content) */
+.header-content {
+  display: flex; /* Places h2 and save-content in the same row */
+  align-items: center; /* Vertically centers the content */
+  margin-bottom: 40px; /* Adds space between header and koala list */
+}
+
+.save-section h2 {
+  flex: 1; /* Takes up 1 part of the available space */
+  font-size: 36px;
+  margin-right: 20px; /* Adds space between h2 and save-content */
+  color: #2E7D32; /* Dark green */
+}
+
+.save-content {
+  flex: 2; /* Takes up 2 parts of the available space */
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+}
+/* Koala List Container */
+.koala-list {
+  display: flex; /* Displays koala items in a row */
+  overflow-x: auto; /* Allows horizontal scrolling if needed */
+  gap: 5vh; /* Adds space between koala items */
+  padding: 20px; /* Adds padding inside the container */
+  scroll-behavior: smooth; /* Enables smooth scrolling */
+}
+
+/* Individual Koala Item */
+.koala-item {
+  position: relative; /* Positions child elements absolutely */
+  flex: 0 0 auto; /* Prevents flex items from shrinking or growing */
+  width: 50vh; /* Fixed width for each item (adjust as needed) */
+  height: 60vh; /* Fixed height for each item (adjust as needed) */
+  overflow: hidden; /* Hides overflow content */
+  border-radius: 10px; /* Rounds the corners */
+  transition: transform 0.3s ease; /* Adds a smooth zoom effect on hover */
+}
+
+.koala-item:hover {
+  transform: scale(1.05); /* Zooms in slightly on hover */
+}
+
+/* Koala Image */
+.koala-item img {
+  width: 100%; /* Makes the image fill the container */
+  height: 100%; /* Makes the image fill the container */
+  object-fit: cover; /* Ensures the image covers the container without distortion */
+}
+
+/* Koala Text Overlay */
+.koala-text {
+  position: absolute; /* Positions the text at the bottom */
+  bottom: 0; /* Aligns the text to the bottom */
+  left: 0; /* Aligns the text to the left */
+  width: 100%; /* Makes the text span the full width */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  color: white; /* White text color */
+  padding: 10px; /* Adds padding inside the text box */
+  text-align: center; /* Centers the text */
+  font-size: 18px; /* Sets the text font size */
+  font-weight: bold; /* Makes the text bold */
+  transition: background-color 0.3s ease; /* Adds a smooth background color transition */
+}
+
+.koala-item:hover .koala-text {
+  background-color: rgba(0, 0, 0, 0.9); /* Darker background on hover */
+}
+
+/* Koala Description */
+.koala-description {
+  position: absolute; /* Positions the description box */
+  top: 0; /* Aligns the box to the top */
+  left: 0; /* Aligns the box to the left */
+  width: 100%; /* Makes the box span the full width */
+  height: 100%; /* Makes the box span the full height */
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  color: white; /* White text color */
+  padding: 0vh 1vh 1vh 1vh; /* Adds padding inside the box */
+  text-align: left; /* Aligns text to the left */
+  font-size: 16px; /* Sets the text font size */
+  opacity: 0; /* Hides the box by default */
+  transition: opacity 0.3s ease; /* Adds a smooth fade effect */
+  display: flex; /* Centers the text vertically */
+  flex-direction: column; /* Stacks the text vertically */
+  justify-content: center; /* Centers the text vertically */
+  align-items: flex-start; /* Aligns text to the left */
+}
+
+.koala-description p {
+  display: flex; /* Uses Flexbox for the two-column layout */
+  gap: 20px; /* Adds space between the label and value */
+  margin: 5px 0; /* Adds spacing between lines */
+  line-height: 1.5; /* Improves readability */
+}
+
+.koala-description .label {
+  font-weight: bold; /* Makes labels bold */
+  min-width: 100px; /* Sets a fixed width for labels (adjust as needed) */
+  text-align: right; /* Aligns labels to the right */
+}
+
+.koala-description .value {
+  flex: 1; /* Allows the value to take up remaining space */
+  text-align: left; /* Aligns values to the left */
+}
+
+.koala-item:hover .koala-description {
+  opacity: 1; /* Shows the box on hover */
+}
+
+
+/* Team section */
+/* Team Section */
+.team-section {
+  
+  padding: 10vh 10vh;
+  background-color: #ffffff; /* White background */
+}
+
+.team-section .header-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px; /* Adds space between header and team picture */
+}
+
+.team-section h2 {
+  flex: 1;
+  font-size: 36px;
+  margin-right: 20px; /* Adds space between h2 and team content */
+  color: #2E7D32; /* Dark green */
+}
+
+.team-section .team-content {
+  flex: 2;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.team-picture {
+  width: 100%;
+  overflow: hidden; /* Ensures the image doesn't overflow */
+  border-radius: 10px; /* Rounds the corners */
+  display: flex; /* Enables Flexbox */
+  justify-content: center; /* Centers the image horizontally */
+}
+
+.team-picture img {
+  max-width: 80%; /* Ensures the image doesn't exceed the container width */
+  height: auto; /* Maintains aspect ratio */
+  display: block; /* Removes extra space below the image */
+}
+
+
+/* Nigros Initiative Section */
+.nigros-section {
+  height: 60vh; /* Full viewport height */
+  display: flex; /* Enables Flexbox */
+  flex-direction: column; /* Stacks children vertically */
+  justify-content: center; /* Centers children vertically */
+  align-items: center; /* Centers children horizontally */
+  text-align: center; /* Centers text */
+  padding: 40px 20px; /* Adds padding */
+  background-color: #f9f9f9; /* Light grey background */
+}
+
+.nigros-section h2 {
+  font-size: 36px;
+  color: #2E7D32; /* Dark green */
+  margin-bottom: 20px;
+}
+
+.nigros-section p {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#scan-qr-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.container:active { 
-            cursor: grab;
-        } 
-
-.cerchio {
-  position: absolute;
-  width: 100px;
-    height: 100px;
-  background-color: #ff0000;
-      z-index: 100;
+#scan-qr-button:hover {
+  background-color: #45a049; /* Darker green */
 }
 
-@media (max-width: 1000px) {
-    .cerchio {
-        width: 100px;
-  height: 100px;
-    }
+#scanner-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 }
 
-.cerchio:nth-child(1) {
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  top: 25%;
+#webcam {
+  border: 2px solid #4CAF50;
+  border-radius: 10px;
 }
 
-.cerchio:nth-child(2) {
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 75%;
+#ticket-list {
+  text-align: left;
 }
 
-.riquadro-1 {
-  position: absolute;
-  width: 100%;
-  height: 50%;
-      background-color: blue;
-  top: 0;
+#ticket-list h3 {
+  font-size: 24px;
+  color: #2E7D32;
+}
+
+#tickets {
+  list-style-type: none;
+  padding: 0;
+}
+
+#tickets li {
+  font-size: 18px;
+  color: #333;
+  margin: 5px 0;
+}
+
+#congrats-message {
+  margin-top: 20px;
+}
+
+#congrats-message p {
+  font-size: 18px;
+  color: #2E7D32;
+}
+
+#unlocked-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Support Us Section */
+.support-section {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+}
+
+.support-section h2 {
+  font-size: 36px;
+  color: #2E7D32; /* Verde scuro */
+  margin-bottom: 20px;
+}
+
+.support-section p {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+.cta-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #4CAF50; /* Verde */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
   cursor: pointer;
 }
 
-.riquadro-2 {
-  position: absolute;
-  width: 100%;
-  height: 50%;
-  background-color: #00ff00;
-  bottom: 0;
+.cta-button:hover {
+  background-color: #45a049; /* Verde più scuro */
 }
 
-.overlay {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 0;
-    background-color: white;
-    transition: height 0.5s ease;
-    overflow-y: auto; /* Modifica overflow-y da "hidden" a "auto" per abilitare lo scrolling verticale */
-    z-index: 9;
-    justify-content: center;
-    align-items: center;
+.twint-info {
+  font-size: 18px;
+  color: #333;
+  margin-top: 20px; /* Spazio sopra il testo */
 }
 
-    .overlay.active {
-        height: 100vh;
-    }
-
-    .centered-text {
-      text-align: center; /* Centra il testo orizzontalmente */
-      font-size: 42px; /* Dimensione del testo */
-      color: black; /* Colore del testo */
-      font-style: italic; /* Stile del testo a epigrafe */
-      padding-left: 20vh;
-      padding-right: 20vh;
-      padding-top: 20vh;
-      padding-bottom: 20vh;
-      font-family: times new roman;
+.hidden {
+  display: none; /* Nasconde il testo inizialmente */
 }
-
-@media (max-width: 1000px) {
-    .centered-text {
-        padding-left: 10vh;
-      padding-right: 10vh;
-      padding-top: 10vh;
-      padding-bottom: 10vh;
-      font-size: 28px; /* Dimensione del testo */
-    }
-}
-
-@media (max-width: 400px) {
-    .centered-text {
-        padding-left: 8vh;
-      padding-right: 8vh;
-      padding-top: 10vh;
-      padding-bottom: 10vh;
-      font-size: 17px; /* Dimensione del testo */
-    }
-}
-

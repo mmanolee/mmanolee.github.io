@@ -1,199 +1,176 @@
-const W = window.innerWidth;
-const H = window.innerHeight;
+const content = [
+  {
+    image: "header_1.jpg",
+    title: "Chi siamo?",
+    text: "Siamo un'associazione dedicata alla protezione e alla conservazione dei koala. Il nostro impegno è volto a garantire un futuro sicuro per questi meravigliosi animali, aiutando a preservare il loro habitat naturale e promuovendo l'educazione ecologica nella comunità."
+  },
+  {
+    image: "header_2.jpg",
+    title: "La nostra missione",
+    text: "La nostra missione è proteggere i koala e i loro habitat. Lavoriamo a stretto contatto con altri enti e volontari per garantire che questi animali abbiano un ambiente sicuro dove possano prosperare, lontano dalle minacce che li mettono a rischio di estinzione."
+  },
+  {
+    image: "header_3.jpg",
+    title: "Salava un Koala noi!",
+    text: "Adottare un koala tramite la nostra associazione è un modo meraviglioso per fare la differenza. Con il tuo contributo, possiamo offrire ai koala un ambiente sicuro e protetto, aiutandoli a crescere e prosperare. Ogni adozione a distanza ti permetterà di seguire il viaggio del tuo koala e di contribuire concretamente alla sua salvaguardia."
+  }
+];
 
-function rnd(min, max) {
-  const minCeiled = Math.ceil(min);
-  const maxFloored = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+
+let currentIndex = 0; // Tracks the current image index
+
+// Get references to the elements
+const imageElement = document.getElementById("image");
+const titleElement = document.getElementById("title");
+const textElement = document.getElementById("text");
+const leftArrow = document.getElementById("left-arrow");
+const rightArrow = document.getElementById("right-arrow");
+
+// Function to update the content with fade effect
+function updateContent(index) {
+  // Fade out the current image
+  imageElement.classList.add("fade-out");
+
+  // Wait for the fade-out to complete
+  setTimeout(() => {
+    // Update the image, title, and text
+    imageElement.src = content[index].image;
+    titleElement.textContent = content[index].title;
+    textElement.textContent = content[index].text;
+
+    // Fade in the new image
+    imageElement.classList.remove("fade-out");
+  }, 500); // Match the duration of the CSS transition (0.5s)
 }
 
-function cmykToRGB(c,m,y,k) 
-{
-    c = (c / 100);
-    m = (m / 100);
-    y = (y / 100);
-    k = (k / 100);
-    
-    c = c * (1 - k) + k;
-    m = m * (1 - k) + k;
-    y = y * (1 - k) + k;
-    
-    var r = 1 - c;
-    var g = 1 - m;
-    var b = 1 - y;
-    
-    
-    r = Math.round(255 * r);
-    g = Math.round(255 * g);
-    b = Math.round(255 * b);
-    
-    
-    return `rgb(${r},${g},${b})`
+// Left arrow click event
+leftArrow.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + content.length) % content.length; // Loop back to the last image if at the first
+  updateContent(currentIndex);
+});
+
+// Right arrow click event
+rightArrow.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % content.length; // Loop back to the first image if at the last
+  updateContent(currentIndex);
+});
+
+
+document.querySelectorAll('.koala-item').forEach((item) => {
+  item.addEventListener('click', (event) => {
+    event.stopPropagation(); // Prevents the click from bubbling up to the document
+    console.log(item.classList)
+    item.classList.toggle('active'); // Toggle the 'active' class
+    console.log(item.classList)
+  });
+});
+
+// Initialize with the first content
+content.forEach((item) => {
+  const img = new Image();
+  img.src = item.image;
+});
+updateContent(currentIndex);
+
+
+// QR
+// Get DOM elements
+const scanButton = document.getElementById('scan-qr-button');
+const scannerContainer = document.getElementById('scanner-container');
+const webcam = document.getElementById('webcam');
+const ticketList = document.getElementById('tickets');
+const congratsMessage = document.getElementById('congrats-message');
+const unlockedLink = document.getElementById('unlocked-link');
+
+// List to store scanned tickets
+const scannedTickets = [];
+
+// Variable to track if the webcam is active
+let isWebcamActive = false;
+let stream = null;
+
+// Function to start the webcam and scan QR codes
+function startScanner() {
+  // Show the scanner container
+  scannerContainer.classList.remove('hidden');
+
+  // Access the webcam
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+    .then((mediaStream) => {
+      stream = mediaStream;
+      webcam.srcObject = stream;
+      webcam.play();
+      isWebcamActive = true;
+      scanButton.textContent = 'Stop Scanning'; // Update button text
+      requestAnimationFrame(scanQRCode);
+    })
+    .catch((err) => {
+      console.error('Error accessing the webcam:', err);
+      alert('Unable to access the webcam. Please allow camera permissions.');
+    });
 }
 
-function update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2)
-{
-    if (K<0)
-        K=0;
-    else if (K>1)
-        K=1;
-
-    color_1 = cmykToRGB(c_1,m_1,y_1,k_1);
-    color_2 = cmykToRGB(c_2,m_2,y_2,k_2);
-
-    console.log("Color 1")
-    console.log(color_1)
-    console.log(c_1,m_1,y_1,k_1)
-    console.log("Color 2")
-    console.log(color_2)
-    console.log(c_2,m_2,y_2,k_2)
-
-    color_avg = cmykToRGB((c_2*K+c_1*(1-K)),
-                          (m_2*K+m_1*(1-K)),
-                          (y_2*K+y_1*(1-K)),
-                          (k_2*K+k_1*(1-K)));
-
-document.getElementById("c1").style.backgroundColor= color_avg;
-document.getElementById("c2").style.backgroundColor= color_avg;
-
-document.getElementById("q1").style.backgroundColor= color_1;
-document.getElementById("q2").style.backgroundColor= color_2;
-
-//document.getElementById("container").innerHTML = `${2} ciao`
-/*
-    ctx.fillStyle = color_1;
-    ctx.fillRect(0, 0, W, H/2); 
-    
-    ctx.beginPath();
-    ctx.arc(W/2, H/4, r, 0, 2*Math.PI);
-    ctx.fillStyle = color_avg;
-    ctx.fill(); 
-    
-    ctx.fillStyle = color_2;
-    ctx.fillRect(0, H/2, W, H); 
-    
-    ctx.beginPath();
-    ctx.arc(W/2, H/2+H/4, r, 0, 2*Math.PI);
-    ctx.fillStyle = color_avg;
-    ctx.fill(); 
-
-    ctx.fillStyle = color_avg;
-    ctx.textAlign = "center";
-    ctx.font = "80px Arial";
-    txt = `${K.toFixed(1)}`;
-    var fM = ctx.measureText(txt);
-    var txtH = fM.actualBoundingBoxAscent + fM.actualBoundingBoxDescent;
-    ctx.fillText(txt, canvas.width/2, canvas.height/2+txtH/2 + (0.5-K)*100 );
-*/
+// Function to stop the webcam
+function stopScanner() {
+  if (stream) {
+    stream.getTracks().forEach((track) => track.stop()); // Stop all tracks
+    webcam.srcObject = null; // Clear the webcam feed
+    isWebcamActive = false;
+    scanButton.textContent = 'Scan QR Code'; // Update button text
+  }
 }
 
+// Function to scan QR codes
+function scanQRCode() {
+  if (isWebcamActive && webcam.readyState === webcam.HAVE_ENOUGH_DATA) {
+    const canvas = document.createElement('canvas');
+    canvas.width = webcam.videoWidth;
+    canvas.height = webcam.videoHeight;
+    const context = canvas.getContext('2d');
+    context.drawImage(webcam, 0, 0, canvas.width, canvas.height);
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    const code = jsQR(imageData.data, imageData.width, imageData.height);
 
-document.getElementById("c_1").value = c_1 = rnd(0,100); 
-document.getElementById("m_1").value = m_1 = rnd(0,100); 
-document.getElementById("y_1").value = y_1 = rnd(0,100); 
-document.getElementById("k_1").value = k_1 = rnd(0,100);
+    if (code) {
+      const ticket = code.data; // Extract the ticket text (e.g., "ticket_1")
+      if (!scannedTickets.includes(ticket)) {
+        scannedTickets.push(ticket); // Add ticket to the list
+        updateTicketList(); // Update the displayed list
 
-document.getElementById("c_2").value = c_2 = rnd(0,100); 
-document.getElementById("m_2").value = m_2 = rnd(0,100); 
-document.getElementById("y_2").value = y_2 = rnd(0,100); 
-document.getElementById("k_2").value = k_2 = rnd(0,100); 
-
-
-r = H/8;
-K = 0.5;
-
-update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2);
-
-
-is_down = false;
-drag = false;
-
-canvas = document.getElementById("container");
-
-
-canvas.onmousedown = function (e) {
-    is_down = true;
-    //console.log("down")
-
-    document.getElementById("q1").style.cursor = "grab";
-    document.getElementById("q2").style.cursor = "grab";
-
-    let x = e.clientX; 
-    let y = e.clientY; 
-
-    K = y/H;    
-
-    update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2)
-
-};
-
-canvas.onmouseup = function (e) {
-    is_down = false;    
-    //console.log("up")
-    
-    document.getElementById("q1").style.cursor = "";
-    document.getElementById("q2").style.cursor = "";
- };
-
-canvas.onmouseleave = function (e) {
-    is_down = false;
- };
-
-canvas.onmousemove = function (e) {
-    
-    if (is_down)
-    {
-
-        let x = e.clientX; 
-        let y = e.clientY; 
-        
-        K = y/H;    
-
-        update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2)
-
+        // Check if all 3 tickets are scanned
+        if (scannedTickets.length === 3) {
+          congratsMessage.classList.remove('hidden');
+          unlockedLink.href = "https://www.desmos.com/calculator/8583ualmsi"
+        }
+      }
     }
+  }
 
- }; 
+  // Continue scanning if the webcam is active
+  if (isWebcamActive) {
+    requestAnimationFrame(scanQRCode);
+  }
+}
 
+// Function to update the ticket list
+function updateTicketList() {
+  ticketList.innerHTML = scannedTickets.map((ticket) => `<li>${ticket}</li>`).join('');
+}
 
-
-document.getElementById("c_1").addEventListener('input', function (e) {
-    c_1 = document.getElementById("c_1").value;
-    update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2);
+// Event listener for the scan button
+scanButton.addEventListener('click', () => {
+  if (isWebcamActive) {
+    stopScanner(); // Stop the webcam if it's active
+  } else {
+    startScanner(); // Start the webcam if it's inactive
+  }
 });
 
- document.getElementById("m_1").addEventListener('input', function (e) {
-    m_1 = document.getElementById("m_1").value;
-    update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2);
-});
+// Ottieni riferimenti agli elementi
+const donateButton = document.getElementById('donate-button');
+const twintInfo = document.getElementById('twint-info');
 
-document.getElementById("y_1").addEventListener('input', function (e) {
-    y_1 = document.getElementById("y_1").value;
-    update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2);
-});
-
-document.getElementById("k_1").addEventListener('input', function (e) {
-    k_1 = document.getElementById("k_1").value;
-    update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2);
-});
-
-
-document.getElementById("c_2").addEventListener('input', function (e) {
-    c_2 = document.getElementById("c_2").value;
-    update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2);
-});
-
- document.getElementById("m_2").addEventListener('input', function (e) {
-    m_2 = document.getElementById("m_2").value;
-    update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2);
-});
-
-document.getElementById("y_2").addEventListener('input', function (e) {
-    y_2 = document.getElementById("y_2").value;
-    update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2);
-});
-
-document.getElementById("k_2").addEventListener('input', function (e) {
-    k_2 = document.getElementById("k_2").value;
-    update_color(K, c_1,m_1,y_1,k_1, c_2,m_2,y_2,k_2);
+// Aggiungi un event listener al bottone
+donateButton.addEventListener('click', () => {
+  twintInfo.classList.toggle('hidden'); // Mostra/nasconde il testo
 });

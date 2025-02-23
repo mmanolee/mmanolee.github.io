@@ -1,58 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Scanner</title>
-    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
-    <style>
-        video, canvas { width: 100%; max-width: 400px; }
-        #output { margin-top: 10px; font-size: 1.2em; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save a Koala</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="wwf_logo.jpg" alt="WWF Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#mission">La nostra missione</a></li>
+        <li><a href="#save">Salva un Koala!</a></li>
+        <li><a href="#team">Su di noi</a></li>
+        <li><a href="#nigros-initiative">Nigros</a></li>
+        <li><a href="#support">Supportaci!</a></li>
+        
+      </ul>
+    </nav>
+  </header>
 
-    <h2>QR Code Scanner</h2>
-    <video id="video" autoplay></video>
-    <canvas id="canvas" hidden></canvas>
-    <div id="output">Waiting for QR Code...</div>
+  <!-- Horizontal List of Images with Text -->
+  <section class="image-section">
+    <div class="arrow left-arrow" id="left-arrow">&#9664;</div> <!-- Left arrow -->
+    <img id="image" src="header_1.jpg" alt="Description of the image">
+    <div class="arrow right-arrow" id="right-arrow">&#9654;</div> <!-- Right arrow -->
+  
+    <!-- Text box over the image -->
+    <div class="text-box">
+      <h1 id="title">Your Title Here</h1>
+      <p id="text">Your small text here.</p>
+    </div>
+  </section>
 
-    <script>
-        const video = document.getElementById("video");
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-        const output = document.getElementById("output");
+  <!-- Our Mission Section -->
+  <section id="mission" class="mission-section">
+    <h2>La nostra missione</h2>
+    <div class="mission-content">
+      <p>
+        I koala sono uno dei simboli più amati dell'Australia, ma oggi affrontano una crisi senza precedenti. La distruzione del loro habitat, gli incendi boschivi, le malattie e l'espansione urbana stanno mettendo a rischio la sopravvivenza di questa specie iconica. Noi di Salviamo un Koala ci impegniamo ogni giorno per proteggere, curare e reintrodurre questi meravigliosi animali nella natura, garantendo loro un futuro più sicuro.
+        La nostra missione è chiara: salvaguardare i koala attraverso un approccio basato su conservazione, educazione e intervento diretto. Collaboriamo con esperti, veterinari e volontari per fornire cure mediche ai koala feriti, proteggere le foreste da cui dipendono e sensibilizzare il pubblico sull'importanza della biodiversità.
+        Attraverso programmi di riforestazione, monitoraggio della popolazione e iniziative di soccorso, lavoriamo instancabilmente per contrastare le minacce che incombono su questa specie. Ma il nostro lavoro non si ferma qui: vogliamo ispirare il cambiamento, coinvolgendo le comunità locali e internazionali nella tutela dell'ambiente.
+        Ogni contributo conta. Adottare simbolicamente un koala, sostenere i nostri progetti o diffondere il nostro messaggio può fare la differenza. Insieme, possiamo garantire che le generazioni future possano ancora vedere i koala vivere liberi e al sicuro nel loro habitat naturale.
+        Unisciti a noi in questa missione. Perché salvare un koala significa proteggere un intero ecosistema.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Save a Koala Section -->
+  <section id="save" class="save-section">
+    <div class="header-content">
+      <h2>Salva un Koala</h2>
+      <div class="save-content">
+        <p>
+          Aiutaci a salvare i koala adottando uno di questi adorabili animali. Con il tuo sostegno, contribuirai non solo alla loro protezione, ma anche al benessere e alla conservazione del loro habitat naturale. Ogni adozione è un passo importante per garantire un futuro sicuro ai koala, che affrontano minacce sempre più gravi a causa della perdita del loro habitat e delle condizioni climatiche avverse. Adottando un koala, diventi parte di un movimento che sta facendo la differenza nella vita di questi splendidi animali. Il tuo contributo ci permette di portare avanti progetti di recupero, sensibilizzazione e protezione che sono essenziali per la loro sopravvivenza.
+        </p>
+      </div>
+      
+    </div>
+    <div class="koala-list">
+      <div class="koala-item">
+        <img src="koala_1.jpg" alt="Koala 1">
+        <div class="koala-text">Wally</div>
+        <div class="koala-description">
+          <p><span class="label">Età:</span> <span class="value">2</span></p>
+          <p><span class="label">Tratti:</span> <span class="value">Drama queesn</span></p>
+          <p><span class="label">Nato in:</span> <span class="value">Brisbane, Australia</span></p>
+          <p><span class="label">Adottabile:</span> <span class="value">Sì</span></p>
+          <p>
+            Wally è il campione olimpico del pisolino. Può addormentarsi 
+            su qualsiasi ramo, in qualsiasi posizione. Una volta l’abbiamo 
+            trovato dormire in equilibrio su un dingo (anche il dingo era confuso).
+          </p>
+        </div>
+      </div>
 
-        async function startCamera() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-                video.srcObject = stream;
-                requestAnimationFrame(scanQR);
-            } catch (error) {
-                output.innerText = "Error accessing camera: " + error;
-            }
-        }
+      <div class="koala-item">
+        <img src="koala_2.jpg" alt="Koala 1">
+        <div class="koala-text">Lulu</div>
+        <div class="koala-description">
+          <p><span class="label">Età:</span> <span class="value">4</span></p>
+          <p><span class="label">Tratti:</span> <span class="value">Master dei pisolini, ladro part-time</span></p>
+          <p><span class="label">Nato a:</span> <span class="value">Melbourne, Australia</span></p>
+          <p><span class="label">Adottabile:</span> <span class="value">Sì</span></p>
+          <p>
+            Lulu ha un talento per le sceneggiate: se un altro koala le ruba 
+            un ramo, finge di svenire per attirare 'attenzione. Ha anche 
+            una collezione di foglie preferite che non condivide con nessuno.
+          </p>
 
-        function scanQR() {
-            if (video.readyState === video.HAVE_ENOUGH_DATA) {
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                const qrCode = jsQR(imageData.data, canvas.width, canvas.height);
-                if (qrCode) {
-                    output.innerText = "QR Code: " + qrCode.data;
-                } else {
-                    requestAnimationFrame(scanQR);
-                }
-            } else {
-                requestAnimationFrame(scanQR);
-            }
-        }
+        </div>
+      </div>
 
-        startCamera();
-    </script>
+      <div class="koala-item">
+        <img src="koala_3.jpg" alt="Koala 1">
+        <div class="koala-text">Bobo</div>
+        <div class="koala-description">
+          <p><span class="label">Età:</span> <span class="value">3.5</span></p>
+          <p><span class="label">Tratti:</span> <span class="value">Amante delle olive</span></p>
+          <p><span class="label">Nato a:</span> <span class="value">Sydney, Australia</span></p>
+          <p><span class="label">Addotabile:</span> <span class="value">Sì</span></p>
+          <p>Bobo ha scoperto che gli umani si sciolgono se inclina la testa e li guarda con occhi dolci. Ha usato questa tattica per ottenere più snack di qualsiasi altro koala nella riserva.</p>
+          
+        </div>
+      </div>
+      <div class="koala-item">
+        <img src="koala_5.jpg" alt="Koala 1">
+        <div class="koala-text">Nicole</div>
+        <div class="koala-description">
+          <p><span class="label">Età:</span> <span class="value">25 anni</span></p>
+          <p><span class="label">Tratti:</span> <span class="value">Ama i cibi proibiti, morde per affetto</span></p>
+          <p><span class="label">Nata a:</span> <span class="value">Ginevra</span></p>
+          <p><span class="label">Adottabile:</span> <span class="value">già Adottata</span></p>
+          <p>Nicole ha un'ossessione inspiegabile per il latte, nonostante il suo stomaco non sia dello stesso parere. Se le piaci, lo capirai subito: invece di un abbraccio, ti regalerà un morso affettuoso—una dichiarazione d’amore in versione koala con i denti. Adora i grattini dietro le orecchie e, dopo una lunga giornata passata a oziare sugli alberi, non disdegna una rilassante cannetta di eucalipto.</p>
 
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" class="team-section">
+    <div class="header-content">
+      <h2>Il Nostro Team</h2>
+      <div class="team-content">
+        <p>
+          Scopri le persone straordinarie che dedicano tempo, impegno e passione alla nostra missione.  
+          Il nostro team è composto da biologi, veterinari, volontari e amanti degli animali,  
+          tutti uniti da un unico obiettivo: proteggere e conservare i koala e il loro habitat naturale.  
+          Ogni giorno lavoriamo instancabilmente per garantire cure ai koala in difficoltà,  
+          piantare nuovi alberi e sensibilizzare il pubblico sull'importanza di salvaguardare questa specie meravigliosa.  
+          Grazie al nostro impegno e al supporto di persone come te, possiamo costruire un futuro più sicuro per i koala.
+        </p>
+      </div>
+    </div>
+    
+    <div class="team-picture">
+      <img src="team.jpg" alt="Our Team">
+    </div>
+  </section>
+
+  <!-- Nigrs Section -->
+  <section id="nigros-initiative" class="nigros-section">
+    <h2>Iniziativa per membri Nigros</h2>
+    <p>
+      Se hai ricevuto un coupon di Nigros, puoi scansionare il codice QR su di esso.
+    </p>
+    <button id="scan-qr-button">Scan QR Code</button>
+    <div id="scanner-container" class="hidden">
+      <video id="webcam" width="300" height="300"></video>
+      <div id="ticket-list">
+        <h3>Coupon scannerizzati:</h3>
+        <ul id="tickets"></ul>
+      </div>
+    </div>
+    <div id="congrats-message" class="hidden">
+      <p>Congratulazioni! Hai scannerizzato tutti i biglietti!.</p>
+      <a href="#" id="unlocked-link">Clicca qui per il tuo premio!</a>
+    </div>
+  </section>
+
+  <!-- Support Us Section -->
+  <section id="support" class="support-section">
+    <h2>Supportaci</h2>
+    <div class="support-content">
+      <p>
+        Il tuo supporto è fondamentale per la nostra missione. 
+        Dona oggi per aiutarci a salvare e proteggere i koala. 
+        Ogni contributo, anche il più piccolo, ci aiuta a fornire cibo, riparo e cure mediche a queste adorabili creature. 
+        Con la tua donazione, diventi parte della nostra famiglia e contribuisci direttamente alla conservazione dei koala e del loro habitat naturale. 
+        Insieme, possiamo fare la differenza e garantire un futuro migliore per questi incredibili animali.
+      </p>
+      <button id="donate-button" class="cta-button">Dona Ora</button>
+      <p id="twint-info" class="twint-info hidden">Invia soldi su Twint a questo numero: <strong>0042</strong></p>
+    </div>
+  </section>
+  
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Salva un Koala. Tutti i diritti riservati.</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
