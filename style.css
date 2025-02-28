@@ -8,6 +8,7 @@ body {
 }
 
 /* Header */
+/* HEADER GENERAL STYLING */
 header {
   background-color: #4CAF50;
   color: white;
@@ -20,27 +21,81 @@ header {
   top: 0;
   z-index: 1000;
 }
+
 header .logo img {
-  padding: 5vh 0vh 0vh;
   height: 10vh; /* Adjust logo height */
 }
+
 nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
+  display: flex; /* Desktop - Items in a row */
 }
-nav ul li a:hover {
-  color: #FFEB3B; /* Yellow color on hover */
-}
+
 nav ul li {
   margin-left: 20px;
 }
+
 nav ul li a {
   color: white;
   text-decoration: none;
   font-size: 18px;
   transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #FFEB3B; /* Yellow on hover */
+}
+
+/* MENU BUTTON (Only Visible on Small Screens) */
+.menu-toggle {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* MOBILE STYLES */
+@media (max-width: 780px) {
+  .menu-toggle {
+    display: block; /* Show Menu Button */
+  }
+  header .logo img {
+    height: 7vh; /* Adjust logo height */
+    padding-top: 1vh;
+  }
+  
+
+  nav {
+    position: absolute;
+    top: 8vh;
+    left: 0;
+    width: 100%;
+    background-color: #4CAF50;
+    display: none; /* Hidden by default */
+  }
+
+  nav ul {
+    display: block; /* Stack items vertically */
+    padding: 0;
+  }
+
+  nav ul li {
+    text-align: center;
+    padding: 10px;
+    margin-left : 10px;
+    margin-right: 10px;
+    border-bottom: 1px solid white;
+  }
+
+  nav ul li a {
+    font-size: 20px;
+    display: block;
+  }
+
+  nav.active {
+    display: block; /* Show menu when active */
+  }
 }
 
 
@@ -117,11 +172,19 @@ nav ul li a {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds a shadow */
 }
 
+@media (max-width: 780px) {
+
+/* FIRST IMAGE LIST */
+.image-section {
+  display: none;
+}
+}
+
 /* Our Mission Section */
 .mission-section {
   /*height: 100vh;*/
   display: flex;
-  align-items: center;
+  align-items: left;
   padding: 10vh 10vh;
   background: linear-gradient(90deg, #e0f7fa 0%, #ffffff 100%);
 }
@@ -136,6 +199,24 @@ nav ul li a {
   font-size: 18px;
   line-height: 1.8;
   color: #333;
+}
+@media (max-width: 780px) {
+  .mission-section {
+    flex-direction: column; /* Stack title on top */
+    text-align: center; /* Center text for mobile */
+  }
+
+  .mission-section h2 {
+    font-size: 32px; /* Slightly smaller for mobile */
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 15px; /* Add space below title */
+  }
+
+  .mission-content {
+    font-size: 16px; /* Reduce text size for better readability */
+    line-height: 1.6;
+  }
 }
 
 /* Save Section */
@@ -180,7 +261,6 @@ nav ul li a {
   flex: 0 0 auto; /* Prevents flex items from shrinking or growing */
   width: 50vh; /* Fixed width for each item (adjust as needed) */
   height: 60vh; /* Fixed height for each item (adjust as needed) */
-  overflow: hidden; /* Hides overflow content */
   border-radius: 10px; /* Rounds the corners */
   transition: transform 0.3s ease; /* Adds a smooth zoom effect on hover */
 }
@@ -240,7 +320,12 @@ nav ul li a {
   gap: 20px; /* Adds space between the label and value */
   margin: 5px 0; /* Adds spacing between lines */
   line-height: 1.5; /* Improves readability */
+
+  word-wrap: break-word; /* Ensures long words break */
+  overflow-wrap: break-word; /* Alternative for better browser support */
+  white-space: normal; /* Allows text to wrap */
 }
+
 
 .koala-description .label {
   font-weight: bold; /* Makes labels bold */
@@ -257,26 +342,84 @@ nav ul li a {
   opacity: 1; /* Shows the box on hover */
 }
 
+@media (max-width: 780px) {
+  /* Adjust Save Section */
+  .save-section {
+    height: auto; /* Let content define the height */
+    padding: 5vh 5vh;
+  }
+
+  /* Stack title & content vertically */
+  .header-content {
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .save-section h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .save-content {
+    font-size: 16px;
+  }
+
+  /* Adjust Koala List for Horizontal Scrolling */
+  .koala-list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    justify-content: flex-start;
+    gap: 3vh; /* Reduce space between items */
+  }
+
+  /* Reduce Koala Item Size */
+  .koala-item {
+    width: 40vh; /* Smaller width */
+    height: 50vh; /* Smaller height */
+  }
+
+  .koala-text {
+    font-size: 16px;
+  }
+
+  .koala-description {
+      max-height: 80vh; /* Prevents the box from taking the full screen */
+      overflow-y: auto; /* Adds scrolling if content is too long */
+      font-size: 3vw;
+      word-wrap: break-word;
+
+        max-width: 95vw; /* Ensures it doesn’t exceed viewport width */
+        word-break: break-word; /* Breaks long words if needed */
+      }
+  
+}
+
+
 
 /* Team section */
 /* Team Section */
 .team-section {
-  
-  padding: 10vh 10vh;
+  padding: 10vh 10vw; /* Adjusted padding for better responsiveness */
   background-color: #ffffff; /* White background */
+  max-width: 1200px;
+  margin: auto;
 }
 
 .team-section .header-content {
   display: flex;
   align-items: center;
-  margin-bottom: 40px; /* Adds space between header and team picture */
+  justify-content: space-between; /* Ensure spacing */
+  gap: 40px; /* Space between text and image */
+  margin-bottom: 40px;
 }
 
 .team-section h2 {
   flex: 1;
   font-size: 36px;
-  margin-right: 20px; /* Adds space between h2 and team content */
   color: #2E7D32; /* Dark green */
+  margin: 0;
 }
 
 .team-section .team-content {
@@ -286,57 +429,80 @@ nav ul li a {
   color: #333;
 }
 
+/* IMAGE CONTAINER */
 .team-picture {
-  width: 100%;
-  overflow: hidden; /* Ensures the image doesn't overflow */
+  display: flex;
+  justify-content: center; /* Centers the image */
+  align-items: center;
   border-radius: 10px; /* Rounds the corners */
-  display: flex; /* Enables Flexbox */
-  justify-content: center; /* Centers the image horizontally */
+  overflow: hidden;
 }
 
 .team-picture img {
-  max-width: 80%; /* Ensures the image doesn't exceed the container width */
-  height: auto; /* Maintains aspect ratio */
-  display: block; /* Removes extra space below the image */
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
+/* MOBILE-FRIENDLY STYLES */
+@media (max-width: 768px) {
+  .team-section .header-content {
+    flex-direction: column; /* Stack text above the image */
+    text-align: center;
+  }
+
+  .team-section h2 {
+    font-size: 28px;
+  }
+
+  .team-section .team-content {
+    font-size: 16px;
+  }
+
+  .team-picture img {
+    width: 50%; /* Prevents image from taking full width */
+  }
+}
 
 /* Nigros Initiative Section */
 .nigros-section {
-  height: 60vh; /* Full viewport height */
-  display: flex; /* Enables Flexbox */
-  flex-direction: column; /* Stacks children vertically */
-  justify-content: center; /* Centers children vertically */
-  align-items: center; /* Centers children horizontally */
-  text-align: center; /* Centers text */
-  padding: 40px 20px; /* Adds padding */
-  background-color: #f9f9f9; /* Light grey background */
+  min-height: 60vh; /* Ensures section adapts to content */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  gap: 20px; /* Adds spacing between elements */
 }
 
 .nigros-section h2 {
   font-size: 36px;
-  color: #2E7D32; /* Dark green */
-  margin-bottom: 20px;
+  color: #2E7D32;
+  margin-bottom: 10px;
 }
 
 .nigros-section p {
   font-size: 18px;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 #scan-qr-button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 18px;
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 #scan-qr-button:hover {
-  background-color: #45a049; /* Darker green */
+  background-color: #45a049;
 }
 
 #scanner-container {
@@ -344,15 +510,18 @@ nav ul li a {
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
+  flex-wrap: wrap; /* Ensures elements wrap on smaller screens */
 }
 
 #webcam {
   border: 2px solid #4CAF50;
   border-radius: 10px;
+  max-width: 100%;
 }
 
 #ticket-list {
-  text-align: left;
+  text-align: left; /* Ensures proper alignment */
+  max-width: 600px; /* Prevents it from stretching */
 }
 
 #ticket-list h3 {
@@ -399,11 +568,13 @@ nav ul li a {
   text-align: center;
   padding: 60px 20px;
   background-color: #f9f9f9;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .support-section h2 {
   font-size: 36px;
-  color: #2E7D32; /* Verde scuro */
+  color: #2E7D32;
   margin-bottom: 20px;
 }
 
@@ -418,26 +589,63 @@ nav ul li a {
 }
 
 .cta-button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 18px;
-  background-color: #4CAF50; /* Verde */
+  background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .cta-button:hover {
-  background-color: #45a049; /* Verde più scuro */
+  background-color: #45a049;
 }
 
 .twint-info {
   font-size: 18px;
   color: #333;
-  margin-top: 20px; /* Spazio sopra il testo */
+  margin-top: 20px;
 }
 
 .hidden {
-  display: none; /* Nasconde il testo inizialmente */
+  display: none;
+}
+
+/* 📱 Mobile Adjustments */
+@media (max-width: 768px) {
+  .nigros-section {
+    padding: 30px 10px;
+  }
+
+  .nigros-section h2 {
+    font-size: 28px;
+  }
+
+  .nigros-section p {
+    font-size: 16px;
+  }
+
+  #scanner-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #ticket-list {
+    text-align: center;
+  }
+
+  .support-section {
+    padding: 40px 10px;
+  }
+
+  .support-section h2 {
+    font-size: 28px;
+  }
+
+  .support-section p {
+    font-size: 16px;
+  }
 }

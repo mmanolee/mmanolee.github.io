@@ -1,21 +1,29 @@
 const content = [
   {
-    image: "header_1.jpg",
+    image: "media/img/header/header_1.jpg",
     title: "Chi siamo?",
     text: "Siamo un'associazione dedicata alla protezione e alla conservazione dei koala. Il nostro impegno è volto a garantire un futuro sicuro per questi meravigliosi animali, aiutando a preservare il loro habitat naturale e promuovendo l'educazione ecologica nella comunità."
   },
   {
-    image: "header_2.jpg",
+    image: "media/img/header/header_2.jpg",
     title: "La nostra missione",
     text: "La nostra missione è proteggere i koala e i loro habitat. Lavoriamo a stretto contatto con altri enti e volontari per garantire che questi animali abbiano un ambiente sicuro dove possano prosperare, lontano dalle minacce che li mettono a rischio di estinzione."
   },
   {
-    image: "header_3.jpg",
+    image: "media/img/header/header_3.jpg",
     title: "Salava un Koala noi!",
     text: "Adottare un koala tramite la nostra associazione è un modo meraviglioso per fare la differenza. Con il tuo contributo, possiamo offrire ai koala un ambiente sicuro e protetto, aiutandoli a crescere e prosperare. Ogni adozione a distanza ti permetterà di seguire il viaggio del tuo koala e di contribuire concretamente alla sua salvaguardia."
   }
 ];
 
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector("nav");
+
+  menuToggle.addEventListener("click", function () {
+    nav.classList.toggle("active");
+  });
+});
 
 let currentIndex = 0; // Tracks the current image index
 
@@ -105,8 +113,8 @@ function startScanner() {
       requestAnimationFrame(scanQRCode);
     })
     .catch((err) => {
-      console.error('Error accessing the webcam:', err);
-      alert('Unable to access the webcam. Please allow camera permissions.');
+      console.error('Errore con la Camera:', err);
+      alert('Non è possibile accedere alla camera selezionata');
     });
 }
 
@@ -116,11 +124,10 @@ function stopScanner() {
     stream.getTracks().forEach((track) => track.stop()); // Stop all tracks
     webcam.srcObject = null; // Clear the webcam feed
     isWebcamActive = false;
-    scanButton.textContent = 'Scan QR Code'; // Update button text
+    scanButton.textContent = 'Scannerizza il tuo codice QR!'; // Update button text
   }
 }
 
-// Function to scan QR codes
 function scanQRCode() {
   if (isWebcamActive && webcam.readyState === webcam.HAVE_ENOUGH_DATA) {
     const canvas = document.createElement('canvas');
@@ -132,12 +139,18 @@ function scanQRCode() {
     const code = jsQR(imageData.data, imageData.width, imageData.height);
 
     if (code) {
-      const ticket = code.data; // Extract the ticket text (e.g., "ticket_1")
-      if (!scannedTickets.includes(ticket)) {
-        scannedTickets.push(ticket); // Add ticket to the list
-        updateTicketList(); // Update the displayed list
 
-        // Check if all 3 tickets are scanned
+      if (code.data == "biglietto_1_regaloNatale2025")
+        ticket = "Buono per un campeggio";
+      else if (code.data == "biglietto_2_regaloNatale2025")
+        ticket = "Buono per una cena elegante";
+      else //(code.data == "biglietto_0_regaloNatale2024")
+        ticket = "Buono per un party";
+      
+      if (!scannedTickets.includes(ticket)) {
+        scannedTickets.push(ticket); 
+        updateTicketList(); 
+        
         if (scannedTickets.length === 3) {
           congratsMessage.classList.remove('hidden');
           unlockedLink.href = "https://www.desmos.com/calculator/8583ualmsi"
@@ -146,15 +159,26 @@ function scanQRCode() {
     }
   }
 
-  // Continue scanning if the webcam is active
   if (isWebcamActive) {
     requestAnimationFrame(scanQRCode);
   }
 }
 
-// Function to update the ticket list
+
 function updateTicketList() {
-  ticketList.innerHTML = scannedTickets.map((ticket) => `<li>${ticket}</li>`).join('');
+  ticketList.innerHTML = scannedTickets
+    .map((ticket) => {
+      // Check if the ticket contains the word "party"
+      if (ticket.includes("party")) {
+        // Map the ticket to its corresponding PDF file
+        const pdfFile = 'media/pdf/party.pdf'; // Assuming the PDF for "party" is always 'party.pdf'
+        return `<li onclick="downloadPDF('${pdfFile}')">${ticket}</li>`;
+      } else {
+        // For other tickets, just display them as plain text
+        return `<li>${ticket}</li>`;
+      }
+    })
+    .join('');
 }
 
 // Event listener for the scan button
@@ -174,3 +198,15 @@ const twintInfo = document.getElementById('twint-info');
 donateButton.addEventListener('click', () => {
   twintInfo.classList.toggle('hidden'); // Mostra/nasconde il testo
 });
+
+function downloadPDF(ticket) {
+  let pdfFile = "media/pdf/per_nikiiii.pdf";
+
+  const link = document.createElement('a');
+  link.href = pdfFile;
+  link.download = pdfFile;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
