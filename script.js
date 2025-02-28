@@ -172,7 +172,7 @@ function updateTicketList() {
       if (ticket.includes("party")) {
         // Map the ticket to its corresponding PDF file
         const pdfFile = 'media/pdf/party.pdf'; // Assuming the PDF for "party" is always 'party.pdf'
-        return `<li onclick="downloadPDF('${pdfFile}')">${ticket}</li>`;
+        return `<li onclick="downloadPDF('${pdfFile}')">${ticket} (cliccami per ricevere i biglietti)</li>`;
       } else {
         // For other tickets, just display them as plain text
         return `<li>${ticket}</li>`;
