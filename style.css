@@ -23,7 +23,7 @@ header {
 }
 
 header .logo img {
-  height: 10vh; /* Adjust logo height */
+  height: 7vh; /* Adjust logo height */
 }
 
 nav ul {
@@ -81,10 +81,8 @@ nav ul li a:hover {
   }
 
   nav ul li {
-    text-align: center;
+    text-align: left;
     padding: 10px;
-    margin-left : 10px;
-    margin-right: 10px;
     border-bottom: 1px solid white;
   }
 
@@ -216,6 +214,7 @@ nav ul li a:hover {
   .mission-content {
     font-size: 16px; /* Reduce text size for better readability */
     line-height: 1.6;
+    text-align: left;
   }
 }
 
@@ -259,8 +258,9 @@ nav ul li a:hover {
 .koala-item {
   position: relative; /* Positions child elements absolutely */
   flex: 0 0 auto; /* Prevents flex items from shrinking or growing */
-  width: 50vh; /* Fixed width for each item (adjust as needed) */
-  height: 60vh; /* Fixed height for each item (adjust as needed) */
+  width: 70vh; /* Fixed width for each item (adjust as needed) */
+  height: 70vh; /* Fixed height for each item (adjust as needed) */
+  overflow: hidden; /* Hides overflow content */
   border-radius: 10px; /* Rounds the corners */
   transition: transform 0.3s ease; /* Adds a smooth zoom effect on hover */
 }
@@ -320,12 +320,7 @@ nav ul li a:hover {
   gap: 20px; /* Adds space between the label and value */
   margin: 5px 0; /* Adds spacing between lines */
   line-height: 1.5; /* Improves readability */
-
-  word-wrap: break-word; /* Ensures long words break */
-  overflow-wrap: break-word; /* Alternative for better browser support */
-  white-space: normal; /* Allows text to wrap */
 }
-
 
 .koala-description .label {
   font-weight: bold; /* Makes labels bold */
@@ -352,7 +347,7 @@ nav ul li a:hover {
   /* Stack title & content vertically */
   .header-content {
     flex-direction: column;
-    text-align: left;
+    text-align: center;
     margin-bottom: 20px;
   }
 
@@ -377,23 +372,17 @@ nav ul li a:hover {
   /* Reduce Koala Item Size */
   .koala-item {
     width: 40vh; /* Smaller width */
-    height: 50vh; /* Smaller height */
+    height: 60vh; /* Smaller height */
+    padding: 5px;
   }
 
   .koala-text {
     font-size: 16px;
   }
 
-  .koala-description {
-      max-height: 80vh; /* Prevents the box from taking the full screen */
-      overflow-y: auto; /* Adds scrolling if content is too long */
-      font-size: 3vw;
-      word-wrap: break-word;
-
-        max-width: 95vw; /* Ensures it doesn’t exceed viewport width */
-        word-break: break-word; /* Breaks long words if needed */
-      }
-  
+  .koala-item p{
+    font-size: 14px;
+  }
 }
 
 
@@ -403,7 +392,6 @@ nav ul li a:hover {
 .team-section {
   padding: 10vh 10vw; /* Adjusted padding for better responsiveness */
   background-color: #ffffff; /* White background */
-  max-width: 1200px;
   margin: auto;
 }
 
@@ -461,7 +449,7 @@ nav ul li a:hover {
   }
 
   .team-picture img {
-    width: 50%; /* Prevents image from taking full width */
+    width: 100%; /* Prevents image from taking full width */
   }
 }
 
@@ -568,7 +556,6 @@ nav ul li a:hover {
   text-align: center;
   padding: 60px 20px;
   background-color: #f9f9f9;
-  max-width: 1200px;
   margin: auto;
 }
 
@@ -634,7 +621,7 @@ nav ul li a:hover {
   }
 
   #ticket-list {
-    text-align: center;
+    text-align: left;
   }
 
   .support-section {
@@ -648,4 +635,8 @@ nav ul li a:hover {
   .support-section p {
     font-size: 16px;
   }
+}
+
+footer {
+  padding-left: 10px;
 }
