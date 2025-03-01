@@ -314,7 +314,7 @@ nav ul li a:hover {
   padding:2px 1px 1px 1px; /* Adds padding inside the box */
   text-align: left; /* Aligns text to the left */
   font-size: 16px; /* Sets the text font size */
-  opacity: 1; /* Hides the box by default */
+  opacity: 0; /* Hides the box by default */
   transition: opacity 0.3s ease; /* Adds a smooth fade effect */
   display: flex; /* Centers the text vertically */
   flex-direction: column; /* Stacks the text vertically */
