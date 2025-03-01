@@ -61,7 +61,7 @@ nav ul li a:hover {
     display: block; /* Show Menu Button */
   }
   header .logo img {
-    height: 7vh; /* Adjust logo height */
+    height: 6vh; /* Adjust logo height */
     padding-top: 1vh;
   }
   
@@ -81,9 +81,12 @@ nav ul li a:hover {
   }
 
   nav ul li {
-    text-align: left;
+    text-align: center;
     padding: 10px;
     border-bottom: 1px solid white;
+    margin:0px;
+    margin-left: 30px;
+    margin-right: 30px;
   }
 
   nav ul li a {
@@ -202,6 +205,7 @@ nav ul li a:hover {
   .mission-section {
     flex-direction: column; /* Stack title on top */
     text-align: center; /* Center text for mobile */
+    padding: 0vh 5vh 0vh 5vh;
   }
 
   .mission-section h2 {
@@ -214,14 +218,13 @@ nav ul li a:hover {
   .mission-content {
     font-size: 16px; /* Reduce text size for better readability */
     line-height: 1.6;
-    text-align: left;
   }
 }
 
 /* Save Section */
 .save-section {
   height: 100vh;
-  padding: 10vh 10vh;
+  padding: 0px;
   background: linear-gradient(90deg, #ffffff 0%, #e0f7fa 100%);
 }
 
@@ -230,6 +233,7 @@ nav ul li a:hover {
   display: flex; /* Places h2 and save-content in the same row */
   align-items: center; /* Vertically centers the content */
   margin-bottom: 40px; /* Adds space between header and koala list */
+  padding: 0vh 5vh 0vh 5vh;
 }
 
 .save-section h2 {
@@ -247,10 +251,13 @@ nav ul li a:hover {
 }
 /* Koala List Container */
 .koala-list {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  width:100%;
   display: flex; /* Displays koala items in a row */
   overflow-x: auto; /* Allows horizontal scrolling if needed */
   gap: 5vh; /* Adds space between koala items */
-  padding: 20px; /* Adds padding inside the container */
   scroll-behavior: smooth; /* Enables smooth scrolling */
 }
 
@@ -341,7 +348,7 @@ nav ul li a:hover {
   /* Adjust Save Section */
   .save-section {
     height: auto; /* Let content define the height */
-    padding: 5vh 5vh;
+    padding: 0vh 0vh;
   }
 
   /* Stack title & content vertically */
@@ -351,6 +358,7 @@ nav ul li a:hover {
     margin-bottom: 20px;
   }
 
+
   .save-section h2 {
     font-size: 28px;
     margin-bottom: 10px;
@@ -358,6 +366,7 @@ nav ul li a:hover {
 
   .save-content {
     font-size: 16px;
+    padding: 20px;
   }
 
   /* Adjust Koala List for Horizontal Scrolling */
