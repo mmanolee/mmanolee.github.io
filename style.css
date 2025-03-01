@@ -291,7 +291,7 @@ nav ul li a:hover {
   width: 100%; /* Makes the text span the full width */
   background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
   color: white; /* White text color */
-  padding: 10px; /* Adds padding inside the text box */
+  padding: 20px; /* Adds padding inside the text box */
   text-align: center; /* Centers the text */
   font-size: 18px; /* Sets the text font size */
   font-weight: bold; /* Makes the text bold */
@@ -311,10 +311,10 @@ nav ul li a:hover {
   height: 100%; /* Makes the box span the full height */
   background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
   color: white; /* White text color */
-  padding: 0vh 1vh 1vh 1vh; /* Adds padding inside the box */
+  padding:2px 1px 1px 1px; /* Adds padding inside the box */
   text-align: left; /* Aligns text to the left */
   font-size: 16px; /* Sets the text font size */
-  opacity: 0; /* Hides the box by default */
+  opacity: 1; /* Hides the box by default */
   transition: opacity 0.3s ease; /* Adds a smooth fade effect */
   display: flex; /* Centers the text vertically */
   flex-direction: column; /* Stacks the text vertically */
