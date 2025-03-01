@@ -151,7 +151,10 @@
     <p>
       Se hai ricevuto un coupon di Nigros, puoi scansionare il codice QR su di esso.
     </p>
+    <button id="upload-qr-button">Carica un'immagine QR</button>
     <button id="scan-qr-button">Scannerizza il codice QR!</button>
+   
+    <input type="file" id="qr-image-input" accept="image/*" style="display: none;" />
     <div id="scanner-container" class="hidden">
       <video id="webcam" width="300" height="300"></video>
       <div id="ticket-list">

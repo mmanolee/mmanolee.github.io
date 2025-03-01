@@ -488,6 +488,16 @@ nav ul li a:hover {
   cursor: pointer;
   transition: background 0.3s ease;
 }
+#upload-qr-button {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 
 #scan-qr-button:hover {
   background-color: #45a049;
